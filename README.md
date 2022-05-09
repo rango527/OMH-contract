@@ -5,6 +5,11 @@ yarn
 ---or---
 npm install
 
+### Build contracts
+yarn build
+---or---
+npm run build
+
 ### Deploy contracts to Rinkeby testnet
 yarn deploy-rinkeby
 ---or---

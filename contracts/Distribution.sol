@@ -39,24 +39,27 @@ contract Distribution {
   }
 
   function withdraw() external {
-    (uint256 num, uint256 withdrawalAmount) = getWithdrawalAmount(msg.sender, holders[msg.sender]);
-    require(num > uint256(0), "not time to withdraw or caller has already all withdrawn");
-    IERC20(OMHToken).safeTransfer(msg.sender, withdrawalAmount);
+    require(holders[msg.sender].percent > uint256(0), "invalid holder");
 
+    (uint256 num, uint256 withdrawalAmount) = getWithdrawalAmount(msg.sender);
+    require(num > uint256(0), "not time to withdraw or caller has already all withdrawn");
+
+    IERC20(OMHToken).safeTransfer(msg.sender, withdrawalAmount);
     holders[msg.sender].numOfWithdraws += num;
 
     emit Withdraw(msg.sender, withdrawalAmount, block.timestamp);
   }
 
-  function getWithdrawalAmount(address _holder, OMH memory _info) public view returns (uint256, uint256) {
-    require(holders[_holder].percent != uint256(0), "invalid holder");
-    if (_info.numOfWithdraws == _info.numOfTimes) {
+  function getWithdrawalAmount(address _holder) public view returns (uint256, uint256) {
+    OMH memory _info = holders[_holder];
+
+    if (_info.percent == uint256(0) || _info.numOfWithdraws >= _info.numOfTimes) {
       return (uint256(0), uint256(0));
     }
 
     uint256 num = 1;
     // 2628029: one month per seconds
-    uint256 withdrawTime = startDate + 2628029 * _info.startAfter + _info.months * _info.numOfWithdraws;
+    uint256 withdrawTime = startDate + 2628029 * (_info.startAfter + _info.months * _info.numOfWithdraws);
     if (block.timestamp < withdrawTime) {
       return (uint256(0), uint256(0));
     } else {
@@ -94,7 +97,7 @@ contract Distribution {
       startAfter: _newSet.startAfter,
       months: _newSet.months,
       numOfTimes: _newSet.numOfTimes,
-      numOfWithdraws: uint256(0)
+      numOfWithdraws: _newSet.numOfWithdraws
     });
   }
 }
