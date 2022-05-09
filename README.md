@@ -1,2 +1,2 @@
-# NFT Lottery contract
+# OMH ERC20 and Distribution contract
 
