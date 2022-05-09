@@ -17,8 +17,6 @@ async function main() {
   console.log("OMHERC20 deployed to:", ERC20.address);
 
   await distribution.setOMHToken(ERC20.address);
-  const OMHTokenAddress = await distribution.OMHToken();
-  console.log('Set OMHToken address:', OMHTokenAddress);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
