@@ -17,7 +17,7 @@ async function main() {
 
   console.log("Distribution deployed to:", distribution.address);
 
-  await ERC20.approve(distribution.address, type(uint256).max);
+  await ERC20.approve(distribution.address, 17_000_000_000);
   console.log('OMHToken approved!');
 }
 

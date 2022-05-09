@@ -1,3 +1,4 @@
+require("@nomiclabs/hardhat-etherscan");
 require("@nomiclabs/hardhat-waffle");
 require('@openzeppelin/hardhat-upgrades');
 require("dotenv").config();
@@ -30,6 +31,11 @@ module.exports = {
     hardhat: {
       hardfork: 'london',
     },
+    rinkeby: {
+      url: `https://rinkeby.infura.io/v3/${INFURA_API_KEY}`,
+      accounts,
+      chainId: 4
+    },
     maticmainnet: {
       url: "https://polygon-rpc.com/",
       accounts,
@@ -61,6 +67,6 @@ module.exports = {
     timeout: 50000,
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_KEY_POLYGON,
+    apiKey: process.env.ETHERSCAN_KEY,
   },
 };
