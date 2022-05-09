@@ -16,8 +16,8 @@ contract Distribution {
   }
 
   address public OMHToken;
-  address public OMHOwner;
   address public admin;
+
   uint256 public startDate;
 
   mapping (address => OMH) public holders;
@@ -33,17 +33,15 @@ contract Distribution {
     _;
   }
 
-  constructor(address _OMHToken, address _OMHOwner, uint256 _startDate) {
+  constructor(uint256 _startDate) {
     admin = msg.sender;
-    OMHToken = _OMHToken;
-    OMHOwner = _OMHOwner;
     startDate = _startDate;
   }
 
   function withdraw() external {
     (uint256 num, uint256 withdrawalAmount) = getWithdrawalAmount(msg.sender, holders[msg.sender]);
     require(num > uint256(0), "not time to withdraw or caller has already all withdrawn");
-    IERC20(OMHToken).safeTransferFrom(OMHOwner, msg.sender, withdrawalAmount);
+    IERC20(OMHToken).safeTransfer(msg.sender, withdrawalAmount);
 
     holders[msg.sender].numOfWithdraws += num;
 
@@ -78,16 +76,12 @@ contract Distribution {
     admin = _newAdmin;
   }
 
-  function changeOMHToken(address _newToken) external onlyAdmin() {
-    OMHToken = _newToken;
-  }
-
-  function changeOMHOwner(address _newOwner) external onlyAdmin() {
-    OMHOwner = _newOwner;
-  }
-
   function changeStartDate(uint256 _newDate) external onlyAdmin() {
     startDate = _newDate;
+  }
+
+  function setOMHToken(address _newToken) external onlyAdmin() {
+    OMHToken = _newToken;
   }
 
   function setHolders(address _user, OMH memory _newSet) external onlyAdmin() {

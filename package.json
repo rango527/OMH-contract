@@ -6,7 +6,8 @@
   "scripts": {
     "clean": "rimraf ./build",
     "build": "npm run clean && npx hardhat clean && npx hardhat compile --config hardhat.config.js",
-    "test": "npx hardhat test"
+    "test": "npx hardhat test",
+    "deploy-rinkeby": "npx hardhat run --network rinkeby scripts/deploy.js"
   },
   "keywords": [],
   "author": "",

@@ -1,5 +1,17 @@
 # OMH ERC20 and Distribution contract
 
+## Package install
+yarn 
+---or---
+npm install
+
+### Deploy contracts to Rinkeby testnet
+yarn deploy-rinkeby
+---or---
+npm run deploy-rinkeby
 
 ### Verify
-npx hardhat verify --network rinkeby --contract contracts/Distribution.sol:Distribution 0xE37fb414c8d33FC2f5042b9FE98B80561307381c 0xDB70177C3e5853581Ae34A505085b80407795798 0x7D686Ff7a4d436Ed10675A7F0E83Fd41477b0717 1652572800
+- Distribution
+npx hardhat verify --network rinkeby --contract contracts/Distribution.sol:Distribution 0x920Da257819262FfAAd139e4548339b0979B5C87 1652572800
+- OMHERC20
+npx hardhat verify --network rinkeby --contract contracts/OMHERC20.sol:OMHERC20 0x9003D3364FE7a28624EA3f8dD88749b6888bC2fC 0x920Da257819262FfAAd139e4548339b0979B5C87
