@@ -18,10 +18,12 @@
     "@openzeppelin/contracts-upgradeable": "^4.6.0",
     "@openzeppelin/hardhat-upgrades": "^1.17.0",
     "chai": "^4.3.6",
+    "dotenv": "^16.0.0",
     "ethereum-waffle": "^3.4.4",
     "ethers": "^5.6.2",
     "express": "^4.18.1",
     "fs": "^0.0.1-security",
-    "hardhat": "^2.9.2"
+    "hardhat": "^2.9.2",
+    "hardhat-gas-reporter": "^1.0.8"
   }
 }

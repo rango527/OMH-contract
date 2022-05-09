@@ -1,5 +1,7 @@
 require("@nomiclabs/hardhat-waffle");
 require('@openzeppelin/hardhat-upgrades');
+require("dotenv").config();
+require("hardhat-gas-reporter");
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -29,7 +31,7 @@ module.exports = {
       hardfork: 'london',
     },
     maticmainnet: {
-      url: "https://rpc-mainnet.maticvigil.com",
+      url: "https://polygon-rpc.com/",
       accounts,
       chainId: 137,
       live: true,
